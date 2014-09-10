@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-tar cvJf init.tar.xz
+tar xvJf init.tar.xz
 init/00install
