@@ -1,12 +1,12 @@
 {
     "variables": {
-        "home": "{{env `HOME`}}
+        "home": "{{env `HOME`}}",
         "iso_url": "https://mirrors.kernel.org/archlinux/iso/2014.08.01/archlinux-2014.08.01-dual.iso",
         "iso_checksum": "52b2fb05dbe00ff1170439bc46608f9cc6489dda",
-        "iso_checksum_type": "sha1"
+        "iso_checksum_type": "sha1",
         "provision_username": "provision",
         "provision_password": "provision",
-        "provision_key_relative_path": "/mine/config/provision/.ssh/provision",
+        "provision_key_relative_path": "/mine/config/provision/.ssh/provision"
     },
     "builders": [
         {
@@ -20,9 +20,9 @@
             "boot_wait": "5s",
             "boot_command": [
                 "<enter><wait10><wait10>",
-                "/usr/bin/curl -O http://{{.HTTPIP}}:{{.HTTPPort}}/install-virtualbox.sh<enter><wait5>",
+                "/usr/bin/curl -O http://{{.HTTPIP}}:{{.HTTPPort}}/install-box.sh<enter><wait5>",
                 "/usr/bin/curl -O http://{{.HTTPIP}}:{{.HTTPPort}}/init.tar.xz<enter><wait5>",
-                "/usr/bin/bash ./install-virtualbox.sh<enter>"
+                "/usr/bin/bash ./install-box.sh<enter>"
             ],
             "disk_size": 20480,
             "hard_drive_interface": "sata",
@@ -30,7 +30,21 @@
             "ssh_password": "{{ user `provision_password`}}",
             "ssh_key_path": "{{user `home`}}/{{user `provision_key_relative_path`}}",
             "shutdown_command": "systemctl poweroff"
+        },
+        {
+            "type":     "null",
+            "host":     "127.0.0.1",
+            "ssh_username": "foo",
+            "ssh_password": "bar"
         }
+    ],
+    "provisioners": [
+      {
+        "type" : "shell",
+        "scripts": [
+          "install-box.sh"
+        ]
+      }
     ],
     "post-processors": [
         {
