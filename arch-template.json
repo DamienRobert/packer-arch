@@ -22,8 +22,8 @@
             ],
             "disk_size": 20480,
             "hard_drive_interface": "sata",
-            "ssh_username": "root",
-            "ssh_password": "vagrant",
+            "ssh_username": "provision",
+            "ssh_password": "provision",
             "shutdown_command": "systemctl poweroff"
         }
     ],
