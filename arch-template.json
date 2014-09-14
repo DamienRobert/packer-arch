@@ -30,21 +30,7 @@
             "ssh_password": "{{ user `provision_password`}}",
             "ssh_key_path": "{{user `home`}}/{{user `provision_key_relative_path`}}",
             "shutdown_command": "systemctl poweroff"
-        },
-        {
-            "type":     "null",
-            "host":     "127.0.0.1",
-            "ssh_username": "foo",
-            "ssh_password": "bar"
         }
-    ],
-    "provisioners": [
-      {
-        "type" : "shell",
-        "scripts": [
-          "install-box.sh"
-        ]
-      }
     ],
     "post-processors": [
         {
