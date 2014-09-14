@@ -24,7 +24,7 @@
             "hard_drive_interface": "sata",
             "ssh_username": "provision",
             "ssh_password": "provision",
-            "shutdown_command": "systemctl poweroff"
+            "shutdown_command": "sudo systemctl poweroff"
         }
     ],
     "post-processors": [
