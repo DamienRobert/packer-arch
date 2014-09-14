@@ -6,7 +6,7 @@
         "iso_checksum_type": "sha1",
         "provision_username": "provision",
         "provision_password": "provision",
-        "provision_key_relative_path": "/mine/config/provision/.ssh/provision"
+        "provision_key_relative_path": "/mine/config/provision/.ssh/provision_rsa"
     },
     "builders": [
         {
