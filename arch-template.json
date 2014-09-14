@@ -1,8 +1,12 @@
 {
     "variables": {
+        "home": "{{env `HOME`}}
         "iso_url": "https://mirrors.kernel.org/archlinux/iso/2014.08.01/archlinux-2014.08.01-dual.iso",
         "iso_checksum": "52b2fb05dbe00ff1170439bc46608f9cc6489dda",
         "iso_checksum_type": "sha1"
+        "provision_username": "provision",
+        "provision_password": "provision",
+        "provision_key_relative_path": "/mine/config/provision/.ssh/provision",
     },
     "builders": [
         {
@@ -22,15 +26,17 @@
             ],
             "disk_size": 20480,
             "hard_drive_interface": "sata",
-            "ssh_username": "provision",
-            "ssh_password": "provision",
-            "shutdown_command": "sudo systemctl poweroff"
+            "ssh_username": "{{ user `provision_username`}}",
+            "ssh_password": "{{ user `provision_password`}}",
+            "ssh_key_path": "{{user `home`}}/{{user `provision_key_relative_path`}}",
+            "shutdown_command": "systemctl poweroff"
         }
     ],
     "post-processors": [
         {
             "type": "vagrant",
-            "output": "mypacker_arch_{{.Provider}}.box"
+            "output": "packer_myarch_{{.BuildName}}_{{.Provider}}.box",
+            "vagrantfile_template": "Vagrantfile.template"
         }
     ]
 }
