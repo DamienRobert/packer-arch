@@ -37,12 +37,6 @@
       "type": "vagrant",
       "output": "packer_myarch_{{.BuildName}}_{{.Provider}}.box",
       "vagrantfile_template": "Vagrantfile.template"
-    },
-    {
-      "type": "vagrant-cloud",
-      "box_tag": "none/myarch",
-      "no_release": "true",
-      "version": "{{user `version`}}"
     }
   ]
 }
