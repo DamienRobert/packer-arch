@@ -42,6 +42,7 @@
     {
       "type": "vagrant-cloud",
       "box_tag": "none/myarch",
+      "no_release": "true",
       "version": "{{user `version`}}"
     }
   ]
