@@ -35,7 +35,7 @@
     "post-processors": [
     {
       "type": "vagrant",
-      "output": "packer_myarch_{{.BuildName}}_{{.Provider}}.box",
+      "output": "packer_myarch_{{user `version`}}_{{.BuildName}}_{{.Provider}}.box",
       "vagrantfile_template": "Vagrantfile.template"
     }
   ]
