@@ -1,6 +1,7 @@
 {
   "variables": {
     "home": "{{env `HOME`}}",
+    "date": "{{isotime "2006-01-02"}}",
     "version": "2014.08.01",
     "iso_checksum": "52b2fb05dbe00ff1170439bc46608f9cc6489dda",
     "iso_checksum_type": "sha1",
@@ -29,13 +30,13 @@
     "ssh_username": "{{ user `provision_username`}}",
     "ssh_password": "{{ user `provision_password`}}",
     "ssh_key_path": "{{user `home`}}/{{user `provision_key_relative_path`}}",
-    "shutdown_command": "systemctl poweroff"
+    "shutdown_command": "sudo systemctl poweroff"
   }
   ],
     "post-processors": [
     {
       "type": "vagrant",
-      "output": "packer_myarch_{{user `version`}}_{{.BuildName}}_{{.Provider}}.box",
+      "output": "packer_myarch_{{user `version`}}_{{user `date`}}_{{.BuildName}}.box",
       "vagrantfile_template": "Vagrantfile.template"
     }
   ]
