@@ -2,7 +2,6 @@
   "variables": {
     "home": "{{env `HOME`}}",
     "version": "2014.08.01",
-    "iso_url": "https://mirrors.kernel.org/archlinux/iso/{{ user `version` }}/archlinux-{{ user `version` }}-dual.iso",
     "iso_checksum": "52b2fb05dbe00ff1170439bc46608f9cc6489dda",
     "iso_checksum_type": "sha1",
     "provision_username": "provision",
@@ -12,7 +11,7 @@
   "builders": [
   {
     "type": "virtualbox-iso",
-    "iso_url": "{{user `iso_url`}}",
+    "iso_url": "https://mirrors.kernel.org/archlinux/iso/{{ user `version` }}/archlinux-{{ user `version` }}-dual.iso",
     "iso_checksum": "{{user `iso_checksum`}}",
     "iso_checksum_type": "{{user `iso_checksum_type`}}",
     "guest_os_type": "ArchLinux_64",
