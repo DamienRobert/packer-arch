@@ -1,42 +1,48 @@
 {
-    "variables": {
-        "home": "{{env `HOME`}}",
-        "iso_url": "https://mirrors.kernel.org/archlinux/iso/2014.08.01/archlinux-2014.08.01-dual.iso",
-        "iso_checksum": "52b2fb05dbe00ff1170439bc46608f9cc6489dda",
-        "iso_checksum_type": "sha1",
-        "provision_username": "provision",
-        "provision_password": "provision",
-        "provision_key_relative_path": "/mine/config/provision/.ssh/provision_rsa"
-    },
-    "builders": [
-        {
-            "type": "virtualbox-iso",
-            "iso_url": "{{user `iso_url`}}",
-            "iso_checksum": "{{user `iso_checksum`}}",
-            "iso_checksum_type": "{{user `iso_checksum_type`}}",
-            "guest_os_type": "ArchLinux_64",
-            "guest_additions_mode": "disable",
-            "http_directory": ".",
-            "boot_wait": "5s",
-            "boot_command": [
-                "<enter><wait10><wait10>",
-                "/usr/bin/curl -O http://{{.HTTPIP}}:{{.HTTPPort}}/install-box.sh<enter><wait5>",
-                "/usr/bin/curl -O http://{{.HTTPIP}}:{{.HTTPPort}}/init.tar.xz<enter><wait5>",
-                "/usr/bin/bash ./install-box.sh<enter>"
-            ],
-            "disk_size": 20480,
-            "hard_drive_interface": "sata",
-            "ssh_username": "{{ user `provision_username`}}",
-            "ssh_password": "{{ user `provision_password`}}",
-            "ssh_key_path": "{{user `home`}}/{{user `provision_key_relative_path`}}",
-            "shutdown_command": "systemctl poweroff"
-        }
-    ],
+  "variables": {
+    "home": "{{env `HOME`}}",
+    "version": "2014.08.01",
+    "iso_url": "https://mirrors.kernel.org/archlinux/iso/{{ user `version` }}/archlinux-{{ user `version` }}-dual.iso",
+    "iso_checksum": "52b2fb05dbe00ff1170439bc46608f9cc6489dda",
+    "iso_checksum_type": "sha1",
+    "provision_username": "provision",
+    "provision_password": "provision",
+    "provision_key_relative_path": "/mine/config/provision/.ssh/provision_rsa"
+  },
+  "builders": [
+  {
+    "type": "virtualbox-iso",
+    "iso_url": "{{user `iso_url`}}",
+    "iso_checksum": "{{user `iso_checksum`}}",
+    "iso_checksum_type": "{{user `iso_checksum_type`}}",
+    "guest_os_type": "ArchLinux_64",
+    "guest_additions_mode": "disable",
+    "http_directory": ".",
+    "boot_wait": "5s",
+    "boot_command": [
+      "<enter><wait10><wait10>",
+    "/usr/bin/curl -O http://{{.HTTPIP}}:{{.HTTPPort}}/install-box.sh<enter><wait5>",
+    "/usr/bin/curl -O http://{{.HTTPIP}}:{{.HTTPPort}}/init.tar.xz<enter><wait5>",
+    "/usr/bin/bash ./install-box.sh<enter>"
+      ],
+    "disk_size": 20480,
+    "hard_drive_interface": "sata",
+    "ssh_username": "{{ user `provision_username`}}",
+    "ssh_password": "{{ user `provision_password`}}",
+    "ssh_key_path": "{{user `home`}}/{{user `provision_key_relative_path`}}",
+    "shutdown_command": "systemctl poweroff"
+  }
+  ],
     "post-processors": [
-        {
-            "type": "vagrant",
-            "output": "packer_myarch_{{.BuildName}}_{{.Provider}}.box",
-            "vagrantfile_template": "Vagrantfile.template"
-        }
-    ]
+    {
+      "type": "vagrant",
+      "output": "packer_myarch_{{.BuildName}}_{{.Provider}}.box",
+      "vagrantfile_template": "Vagrantfile.template"
+    },
+    {
+      "type": "vagrant-cloud",
+      "box_tag": "none/myarch",
+      "version": "{{user `version`}}"
+    }
+  ]
 }
