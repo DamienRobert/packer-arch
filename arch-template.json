@@ -1,13 +1,13 @@
 {
   "variables": {
     "home": "{{env `HOME`}}",
-    "date": "{{isotime "2006-01-02"}}",
+    "date": "{{isotime `2006-01-02`}}",
     "version": "2014.10.01",
     "iso_checksum": "db8de6927d585b8d7dee63b4cb0bc1fb787b2cad",
     "iso_checksum_type": "sha1",
     "provision_username": "provision",
     "provision_password": "provision",
-    "provision_key_relative_path": "/mine/config/provision/.ssh/provision_rsa"
+    "provision_key_relative_path": "/mine/syst/ssh/provision_id_rsa"
   },
   "builders": [
   {
