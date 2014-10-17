@@ -2,8 +2,8 @@
   "variables": {
     "home": "{{env `HOME`}}",
     "date": "{{isotime "2006-01-02"}}",
-    "version": "2014.08.01",
-    "iso_checksum": "52b2fb05dbe00ff1170439bc46608f9cc6489dda",
+    "version": "2014.10.01",
+    "iso_checksum": "db8de6927d585b8d7dee63b4cb0bc1fb787b2cad",
     "iso_checksum_type": "sha1",
     "provision_username": "provision",
     "provision_password": "provision",
@@ -12,7 +12,7 @@
   "builders": [
   {
     "type": "virtualbox-iso",
-    "iso_url": "https://mirrors.kernel.org/archlinux/iso/{{ user `version` }}/archlinux-{{ user `version` }}-dual.iso",
+    "iso_url": "{{ user `home`}}/opt/vagrant/packer-arch/archisos/archlinux-{{ user `version` }}-dual.iso",
     "iso_checksum": "{{user `iso_checksum`}}",
     "iso_checksum_type": "{{user `iso_checksum_type`}}",
     "guest_os_type": "ArchLinux_64",
