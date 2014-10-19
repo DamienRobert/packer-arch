@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-tar xvJf init.tar.xz
-init/00install
+tar xvJf packer.tar.xz
+packer/@init/00install
